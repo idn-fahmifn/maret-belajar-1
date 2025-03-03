@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Middleware\UmurMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -92,8 +93,13 @@ Route::prefix('umur')->group(function(){
     })->name('proses');
 });
 
-
+// route dengan controller manual
 Route::get('/barang', [BarangController::class, 'index'])->name('barang.index');
 Route::post('/barang', [BarangController::class, 'post'])->name('barang.post');
+
+// shurtcut operasi CRUD 
+Route::resource('kategori', KategoriController::class);
+// method function tambahan.
+Route::get('export/kategori', [KategoriController::class, 'export'])->name('expor.kategori');
 
 

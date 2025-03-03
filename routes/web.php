@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\UmurMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -73,7 +74,7 @@ Route::prefix('umur')->group(function(){
     // Route untuk halaman utama
     Route::get('success', function(){
         return 'Umur kamu memenuhi.';
-    })->name('success');
+    })->middleware(UmurMiddleware::class)->name('success');
 
     Route::post('proses', function(Request $request){
         // aturan mengisi form
@@ -81,6 +82,10 @@ Route::prefix('umur')->group(function(){
             'nama' => ['string', 'required', 'min:3', 'max:20'],
             'umur' => ['integer', 'required', 'min:1']
         ]);
+
+        // membuat key umur agar bisa dibaca di middleware
+        $request->session()->put('umur', $request->umur);
+
         // mengarahkan ke halaman success
         return redirect()->route('success');
     })->name('proses');

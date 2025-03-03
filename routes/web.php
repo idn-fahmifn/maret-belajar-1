@@ -40,9 +40,6 @@ Route::get('nama/{param?}', function($saya = 'belum didefinisikan'){
     $training = 'Laravel';
     return view('nama', compact('saya', 'training'));
 })->name('nama.halaman');
-
-
-
 /**
  * Grouping
  * group training
@@ -63,3 +60,19 @@ Route::prefix('training')->group(function(){ //nama group
         return 'hello page';
     })->name('hello');
 });
+
+
+Route::prefix('umur')->group(function(){
+
+    // Route untuk halaman form
+    Route::get('form', function(){
+        return view('umur.form');
+    })->name('form.umur');
+
+    // Route untuk halaman utama
+    Route::get('success', function(){
+        return 'Umur kamu memenuhi.';
+    });
+
+});
+

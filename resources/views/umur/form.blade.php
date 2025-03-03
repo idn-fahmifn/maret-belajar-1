@@ -21,7 +21,7 @@
     @if ($errors->any())
         <ul>
             @foreach ($errors->all() as $item)
-                <li>{{$item}}</li>
+                <li style="color: red">{{$item}}</li>
             @endforeach
         </ul>
     @endif

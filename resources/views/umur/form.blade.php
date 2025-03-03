@@ -8,7 +8,25 @@
 </head>
 <body>
     <h1>Hallo berapa umur kamu?</h1>
-    <span>Masukan umur kamu di form bawah ini : </span>
+    <p>Masukan umur kamu di form bawah ini : </p>
+
+    {{-- menampilkan error middleware --}}
+    @if (session('gagal'))
+        <span style="color: red">
+            Opps, {{session('gagal')}}
+        </span>
+    @endif
+
+    {{-- error valodator --}}
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $item)
+                <li>{{$item}}</li>
+            @endforeach
+        </ul>
+    @endif
+
+
     {{-- area form --}}
     <form action="{{route('proses')}}" method="post">
         @csrf 

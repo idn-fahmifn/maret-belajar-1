@@ -10,7 +10,7 @@
     <h1>Hallo berapa umur kamu?</h1>
     <span>Masukan umur kamu di form bawah ini : </span>
     {{-- area form --}}
-    <form action="#" method="post">
+    <form action="{{route('proses')}}" method="post">
         @csrf 
         {{-- form nama --}}
         <label>Nama</label>

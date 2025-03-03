@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -72,7 +73,16 @@ Route::prefix('umur')->group(function(){
     // Route untuk halaman utama
     Route::get('success', function(){
         return 'Umur kamu memenuhi.';
-    });
+    })->name('success');
 
+    Route::post('proses', function(Request $request){
+        // aturan mengisi form
+        $request->validate([
+            'nama' => ['string', 'required', 'min:3', 'max:20'],
+            'umur' => ['integer', 'required', 'min:1']
+        ]);
+        // mengarahkan ke halaman success
+        return redirect()->route('success');
+    })->name('proses');
 });
 
